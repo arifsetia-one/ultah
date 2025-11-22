@@ -439,23 +439,66 @@
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             header {
+                /* UBAH DARI GRID KE FLEXBOX */
+                display: flex;
                 flex-direction: column;
-                gap: 1rem;
-                padding: 1.5rem 5%;
-                position: relative;
-            }
-
-            /* Di mobile kadang lebih enak relatif biar ga makan layar, tapi kalau mau fixed tetep oke */
-
-            .logo {
-                order: -1;
-            }
-
-            nav ul {
-                gap: 1rem;
-                font-size: 0.6rem;
                 justify-content: center;
+                align-items: center;
+                height: auto;
+                /* Biarkan tinggi menyesuaikan isi */
+                padding: 1rem 1rem;
+                /* Padding lebih kecil */
+                background-color: rgba(250, 249, 246, 0.98);
+                /* Background lebih solid biar tulisan jelas */
+            }
+
+            /* LOGO DI PALING ATAS */
+            .logo {
+                order: 1;
+                margin-bottom: 10px;
+            }
+
+            /* NAVIGASI DI BAWAH LOGO */
+            .nav-left {
+                order: 2;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-bottom: 5px;
+            }
+
+            .nav-right {
+                order: 3;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+            }
+
+            /* RAPIKAN LIST MENU */
+            nav ul {
+                display: flex;
                 flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                /* Jarak antar menu */
+                width: 100%;
+            }
+
+            nav ul li a {
+                font-size: 0.7rem;
+                /* Ukuran font pas untuk HP */
+                display: block;
+                padding: 5px;
+            }
+
+            /* PERBAIKAN KONTEN LAIN AGAR TIDAK LEBAR MELEBIHI LAYAR */
+            .container {
+                padding: 0 15px;
+            }
+
+            .hero {
+                padding-top: 8rem;
+                /* Tambah padding atas karena header jadi lebih tinggi */
             }
 
             .hero-grid,
@@ -463,46 +506,28 @@
             .stories-grid,
             .blog-grid {
                 grid-template-columns: 1fr;
+                /* Paksa jadi 1 kolom */
                 gap: 3rem;
-            }
-
-            .hero-grid {
                 text-align: center;
-            }
-
-            .hero-text p {
-                margin: 0 auto 2rem;
             }
 
             .hero-images {
                 justify-content: center;
+                margin-top: 2rem;
             }
 
-            .hero-offset {
-                margin-top: 0;
-            }
-
-            .services-grid {
-                display: flex;
-                flex-direction: column-reverse;
-            }
-
-            .quote-box {
-                width: 90%;
-                padding: 2rem;
-            }
-
-            .quote-text {
-                font-size: 1.4rem;
-            }
-
+            /* Sembunyikan beberapa foto footer di HP biar tidak terlalu panjang */
             .insta-grid {
                 grid-template-columns: repeat(3, 1fr);
             }
 
-            .insta-grid .img-zoom:nth-child(4),
-            .insta-grid .img-zoom:nth-child(5) {
+            .insta-grid .img-zoom:nth-child(n+7) {
                 display: none;
+            }
+
+            .display-1 {
+                font-size: 2.5rem;
+                /* Kecilkan font judul utama */
             }
         }
     </style>
