@@ -15,25 +15,19 @@
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 
     <style>
-        /* --- 1. RESET & VARIABLES --- */
+        /* --- 1. RESET & VARIABLES (CSS BERSIH) --- */
         :root {
+            /* Warna diambil dari kode CSS lama Anda */
             --primary-text: #303030;
             --secondary-text: #666969;
             --bg-color: #faf9f6;
             --accent-color: #cfb7b7;
+            /* Warna Pink/Beige khas Blume */
+
+            /* Font Setup */
             --font-serif: 'Playfair Display', 'Zodiak', serif;
             --font-sans: 'Lato', 'Satoshi', sans-serif;
             --font-script: 'Great Vibes', cursive;
-        }
-
-        /* TAMBAHAN PENTING UNTUK SMOOTH SCROLL */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Agar Section tidak ketutup Header saat di klik */
-        section {
-            scroll-margin-top: 100px;
         }
 
         * {
@@ -49,6 +43,7 @@
             line-height: 1.6;
             overflow-x: hidden;
             padding-top: 80px;
+            /* Memberi ruang karena header fixed */
         }
 
         a {
@@ -75,6 +70,7 @@
             padding: 0 20px;
         }
 
+        /* Typography */
         h1,
         h2,
         h3 {
@@ -100,6 +96,14 @@
             font-family: var(--font-serif);
         }
 
+        .script-accent {
+            font-family: var(--font-script);
+            font-size: 3rem;
+            color: var(--accent-color);
+            position: absolute;
+            z-index: 1;
+        }
+
         .btn {
             display: inline-block;
             padding: 15px 35px;
@@ -112,14 +116,11 @@
             cursor: pointer;
             transition: 0.3s;
             margin-top: 20px;
-            border-radius: 50px;
-            /* Sedikit membulat biar modern */
         }
 
         .btn:hover {
             background-color: #bfafa9;
             transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(207, 183, 183, 0.4);
         }
 
         /* --- IMAGE HOVER ZOOM EFFECT --- */
@@ -127,13 +128,10 @@
             overflow: hidden;
             display: block;
             width: 100%;
-            border-radius: 4px;
-            /* Sedikit smooth di ujung gambar */
         }
 
         .img-zoom img {
-            transition: transform 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-            /* Lebih lambat dikit biar elegan */
+            transition: transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
             width: 100%;
             height: 100%;
         }
@@ -142,22 +140,34 @@
             transform: scale(1.08);
         }
 
-        /* --- 2. HEADER (STICKY) --- */
+        /* --- 2. HEADER (STICKY & SPLIT LAYOUT) --- */
         header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             z-index: 1000;
-            background-color: rgba(250, 249, 246, 0.90);
-            backdrop-filter: blur(10px);
-            /* Blur lebih kuat */
-            padding: 1.2rem 5%;
+            background-color: rgba(250, 249, 246, 0.95);
+            /* Agak transparan */
+            backdrop-filter: blur(5px);
+            padding: 1.5rem 5%;
+
+            /* Grid Layout untuk Menu Kiri - Logo - Menu Kanan */
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             align-items: center;
             border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
+        }
+
+        /* Garis Bawah Custom (Lebar 90%) */
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 5%;
+            width: 90%;
+            height: 1px;
+            background-color: #e0e0e0;
         }
 
         .logo {
@@ -191,28 +201,9 @@
             letter-spacing: 2px;
             font-weight: 600;
             color: #333;
-            position: relative;
         }
 
-        /* Animasi garis bawah menu */
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 1px;
-            bottom: -5px;
-            left: 0;
-            background-color: var(--accent-color);
-            transition: width 0.3s;
-        }
-
-        nav ul li a:hover::after,
-        nav ul li a.active::after {
-            width: 100%;
-        }
-
-        nav ul li a:hover,
-        nav ul li a.active {
+        nav ul li a:hover {
             color: var(--accent-color);
         }
 
@@ -224,7 +215,7 @@
             justify-self: end;
         }
 
-        /* --- SECTIONS --- */
+        /* --- 3. HERO SECTION --- */
         .hero {
             padding: 6rem 0;
         }
@@ -257,6 +248,9 @@
             margin-top: 60px;
         }
 
+        /* Efek gambar turun sebelah kanan */
+
+        /* --- 4. SERVICES --- */
         .services {
             padding: 6rem 0;
             background: #fff;
@@ -269,12 +263,17 @@
             align-items: center;
         }
 
+        .services-text h2 {
+            margin-bottom: 1.5rem;
+        }
+
         .services-text p {
             color: var(--secondary-text);
             margin-bottom: 2rem;
             font-size: 1.1rem;
         }
 
+        /* --- 5. STORIES (PORTFOLIO) --- */
         .stories {
             padding: 8rem 0;
         }
@@ -299,6 +298,11 @@
             margin-bottom: 1.5rem;
         }
 
+        .story-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
         .story-meta {
             font-size: 0.75rem;
             text-transform: uppercase;
@@ -315,12 +319,12 @@
             background: var(--accent-color);
         }
 
+        /* --- 6. TESTIMONIAL --- */
         .testimonial {
-            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
+            /* Background Image Placeholder */
+            background-image: url('https://images.unsplash.com/photo-1519741497674-611481863552?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80');
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
-            /* Parallax Effect */
             padding: 10rem 0;
             display: flex;
             justify-content: center;
@@ -359,6 +363,7 @@
             font-weight: bold;
         }
 
+        /* --- 7. BLOG --- */
         .blog {
             padding: 8rem 0;
             text-align: center;
@@ -391,6 +396,7 @@
             display: block;
         }
 
+        /* --- 8. FOOTER --- */
         footer {
             background: #fff;
             padding: 5rem 0 2rem;
@@ -427,10 +433,6 @@
             color: var(--primary-text);
         }
 
-        .footer-links a:hover {
-            color: var(--accent-color);
-        }
-
         .copyright {
             font-size: 0.7rem;
             color: #999;
@@ -439,18 +441,17 @@
         /* --- MOBILE RESPONSIVE --- */
         @media (max-width: 768px) {
             header {
+                display: flex;
                 flex-direction: column;
                 gap: 1rem;
                 padding: 1.5rem 5%;
-                position: relative;
             }
-
-            /* Di mobile kadang lebih enak relatif biar ga makan layar, tapi kalau mau fixed tetep oke */
 
             .logo {
                 order: -1;
             }
 
+            /* Logo pindah ke atas */
             nav ul {
                 gap: 1rem;
                 font-size: 0.6rem;
@@ -482,6 +483,8 @@
                 margin-top: 0;
             }
 
+            /* Matikan offset di HP */
+
             .services-grid {
                 display: flex;
                 flex-direction: column-reverse;
@@ -508,12 +511,12 @@
     </style>
 </head>
 
-<body id="home">
+<body>
 
     <header>
         <nav class="nav-left">
             <ul>
-                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#">Home</a></li>
                 <li><a href="#stories">Stories</a></li>
                 <li><a href="#gallery">Galery</a></li>
             </ul>
@@ -542,7 +545,7 @@
                     <p>Tanggal 18 mungkin sudah lewat di kalender, tapi rasanya aku ingin merayakan kehadiranmu setiap
                         hari.
                     </p>
-                    <a href="#stories" class="btn">Pencet Yuk !</a>
+                    <button class="btn">Pencet Yuk !</button>
                 </div>
                 <div class="hero-images" data-aos="fade-left">
                     <div class="hero-col">
@@ -560,12 +563,12 @@
         </div>
     </section>
 
-    <section class="services" id="about">
+    <section class="services">
         <div class="container">
             <div class="services-grid">
                 <div class="services-img" data-aos="zoom-in">
                     <div class="img-zoom">
-                        <img src="https://placehold.co/800x500/e0e0e0/555555?text=Couple+Goals" alt="Services">
+                        <img src="https://placehold.co/800x500/e0e0e0/555555?text=Services+Image" alt="Services">
                     </div>
                 </div>
                 <div class="services-text" data-aos="fade-up">
@@ -582,39 +585,42 @@
     <section class="stories" id="stories">
         <div class="container">
             <div class="stories-header" data-aos="fade-up">
-                <h2 class="display-2">"Setiap foto punya cerita, tapi cerita<br><span
-                        class="italic-accent">favoritku</span>
-                    adalah<br>saat kita tertawa bersama"</h2>
+                <h2 class="display-2">" Setiap foto punya cerita, tapi cerita<span class="italic-accent"></span>
+                    favoritku</span>
+                    adalah<br>saat kita tertawa bersama "</h2>
             </div>
 
-            <div class="stories-grid" id="gallery">
+            <div class="stories-grid">
                 <div class="story-card" data-aos="fade-up">
                     <div class="img-zoom">
-                        <img src="https://placehold.co/600x800/d4b8b1/ffffff?text=Moment+1" alt="Foto 1">
+                        <img src="https://placehold.co/600x800/d4b8b1/ffffff?text=Lucy+%26+David" alt="Lucy & David">
                     </div>
-                    <h3>First Date</h3>
-                    <div class="story-meta">Jogja <div class="separator"></div> 2023</div>
+                    <h3>Lucy & David</h3>
+                    <div class="story-meta">Lakeland <div class="separator"></div> Wedding</div>
                 </div>
                 <div class="story-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="img-zoom">
-                        <img src="https://placehold.co/600x800/e0e0e0/555555?text=Moment+2" alt="Foto 2">
+                        <img src="https://placehold.co/600x800/e0e0e0/555555?text=Stacy+%26+Thomas"
+                            alt="Stacy & Thomas">
                     </div>
-                    <h3>Liburan Bareng</h3>
-                    <div class="story-meta">Bali <div class="separator"></div> 2024</div>
+                    <h3>Stacy & Thomas</h3>
+                    <div class="story-meta">Irvington <div class="separator"></div> Engagement</div>
                 </div>
                 <div class="story-card" data-aos="fade-up">
                     <div class="img-zoom">
-                        <img src="https://placehold.co/600x800/e0e0e0/555555?text=Moment+3" alt="Foto 3">
+                        <img src="https://placehold.co/600x800/e0e0e0/555555?text=Katherine+%26+Jack"
+                            alt="Katherine & Jack">
                     </div>
-                    <h3>Wisuda Kamu</h3>
-                    <div class="story-meta">Kampus <div class="separator"></div> Graduation</div>
+                    <h3>Katherine & Jack</h3>
+                    <div class="story-meta">Waynesboro <div class="separator"></div> Wedding</div>
                 </div>
                 <div class="story-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="img-zoom">
-                        <img src="https://placehold.co/600x800/d4b8b1/ffffff?text=Moment+4" alt="Foto 4">
+                        <img src="https://placehold.co/600x800/d4b8b1/ffffff?text=Jessica+%26+Owen"
+                            alt="Jessica & Owen">
                     </div>
-                    <h3>Random Date</h3>
-                    <div class="story-meta">Cafe <div class="separator"></div> Chill</div>
+                    <h3>Jessica & Owen</h3>
+                    <div class="story-meta">Arlington <div class="separator"></div> Couples</div>
                 </div>
             </div>
         </div>
@@ -624,7 +630,7 @@
         <div class="quote-box" data-aos="zoom-in">
             <span class="quote-icon">“</span>
             <p class="quote-text">Bertambah usia berarti bertambah pula waktuku untuk mencintaimu lebih baik lagi. Happy
-                Birthday, my favorite person.</p>
+                Birthday, my favorite person..</p>
             <div class="quote-author">Arif & Novi</div>
         </div>
     </section>
@@ -637,44 +643,45 @@
             <div class="blog-grid">
                 <div class="blog-card" data-aos="fade-up">
                     <div class="img-zoom">
-                        <img src="https://placehold.co/600x400/d4b8b1/ffffff?text=Novi+Kecil" alt="Blog 1">
+                        <img src="https://placehold.co/600x400/d4b8b1/ffffff?text=Blog+1" alt="Blog 1">
                     </div>
-                    <span class="blog-date" style="margin-top: 15px;">November 18, [Tahun Lahir] — Elu Brojol</span>
+                    <span class="blog-date" style="margin-top: 15px;">November 18, 2001 — Elu Brojol</span>
                     <h3>"Duniaku jadi lebih terang sejak ada kamu"</h3>
                 </div>
                 <div class="blog-card" data-aos="fade-up" data-aos-delay="100">
                     <div class="img-zoom">
-                        <img src="https://placehold.co/600x400/e0e0e0/555555?text=Novi+Sekarang" alt="Blog 2">
+                        <img src="https://placehold.co/600x400/e0e0e0/555555?text=Blog+2" alt="Blog 2">
                     </div>
-                    <span class="blog-date" style="margin-top: 15px;">November 18, 2025 — Sekarang udah gede</span>
+                    <span class="blog-date" style="margin-top: 15px;">November 18, 2025 — Sekrang udah gede</span>
                     <h3>"Terima kasih telah menjadi versi terbaik dirimu"</h3>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer id="contact">
+    <footer>
         <div class="container">
             <h3 class="footer-title" data-aos="fade-up">"Partner debat, partner tawa, partner hidup."</h3>
             <div class="insta-grid">
                 <div class="img-zoom" data-aos="fade-up" data-aos-delay="0"><img
-                        src="https://placehold.co/300x300/e0e0e0/555555?text=Love" alt="IG 1"></div>
+                        src="https://placehold.co/300x300/e0e0e0/555555?text=IG+1" alt="IG 1"></div>
                 <div class="img-zoom" data-aos="fade-up" data-aos-delay="50"><img
-                        src="https://placehold.co/300x300/d4b8b1/ffffff?text=You" alt="IG 2"></div>
+                        src="https://placehold.co/300x300/d4b8b1/ffffff?text=IG+2" alt="IG 2"></div>
                 <div class="img-zoom" data-aos="fade-up" data-aos-delay="100"><img
-                        src="https://placehold.co/300x300/e0e0e0/555555?text=So" alt="IG 3"></div>
+                        src="https://placehold.co/300x300/e0e0e0/555555?text=IG+3" alt="IG 3"></div>
                 <div class="img-zoom" data-aos="fade-up" data-aos-delay="150"><img
-                        src="https://placehold.co/300x300/d4b8b1/ffffff?text=Much" alt="IG 4"></div>
+                        src="https://placehold.co/300x300/d4b8b1/ffffff?text=IG+4" alt="IG 4"></div>
                 <div class="img-zoom" data-aos="fade-up" data-aos-delay="200"><img
-                        src="https://placehold.co/300x300/e0e0e0/555555?text=<3" alt="IG 5"></div>
+                        src="https://placehold.co/300x300/e0e0e0/555555?text=IG+5" alt="IG 5"></div>
             </div>
 
             <div class="footer-links" data-aos="fade-up">
-                <a href="#home">Home</a>
-                <a href="#stories">Stories</a>
-                <a href="#gallery">Gallery</a>
-                <a href="#blog">Blog</a>
-                <a href="#about">About</a>
+                <a href="#">Home</a>
+                <a href="#">Blog</a>
+                <a href="#">Stories</a>
+                <a href="#">Gallery</a>
+                <a href="#">About</a>
+                <a href="#">Contact</a>
             </div>
 
             <div class="copyright" data-aos="fade-up">© 2025 Arif Setiawan & Noviana Sami Ratri.</div>
@@ -683,33 +690,10 @@
 
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
-        // 1. Inisialisasi AOS (Animasi Scroll Element)
         AOS.init({
-            duration: 1200,
-            once: true,
-            offset: 100
-        });
-
-        // 2. Script untuk Highlight Menu saat di Scroll (Active State)
-        const sections = document.querySelectorAll('section, footer, body');
-        const navLi = document.querySelectorAll('nav ul li a');
-
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 200)) { // 200px offset biar trigger lebih cepat
-                    current = section.getAttribute('id');
-                }
-            });
-
-            navLi.forEach(a => {
-                a.classList.remove('active');
-                if (a.getAttribute('href').includes(current)) {
-                    a.classList.add('active');
-                }
-            });
+            duration: 1000, // Durasi animasi dalam milidetik
+            once: true,     // Animasi hanya terjadi sekali saat elemen masuk viewport
+            offset: 50      // Jarak (px) dari bagian bawah viewport sebelum animasi dimulai
         });
     </script>
 </body>
